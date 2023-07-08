@@ -3,8 +3,8 @@ class_name Penguin
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-@export var _Sprite: NodePath
-@onready var Sprite: Sprite2D = get_node(_Sprite)
+
+@export var Sprite: Sprite2D
 
 func _physics_process(delta: float) -> void:
 	# Physics

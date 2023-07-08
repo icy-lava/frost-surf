@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtmycdb0xitq2"]
+
+[ext_resource type="Script" path="res://object/terrain.gd" id="1_yfpvp"]
+
+[sub_resource type="Curve2D" id="Curve2D_cx5ah"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 1464, -302.642, 8.48528, 302.642, -8.48528, 576, 1656, -178.191, -36.7696, 178.191, 36.7696, 1464, 1896, -229.103, -8.48528, 229.103, 8.48528, 2184, 2112, 0, 0, 0, 0, 2784, 1920)
+}
+point_count = 5
+
+[node name="Terrain" type="Path2D" node_paths=PackedStringArray("Polygon")]
+curve = SubResource("Curve2D_cx5ah")
+script = ExtResource("1_yfpvp")
+Polygon = NodePath("Body/Polygon")
+
+[node name="Body" type="StaticBody2D" parent="."]
+
+[node name="Polygon" type="CollisionPolygon2D" parent="Body"]
+build_mode = 1
