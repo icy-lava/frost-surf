@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://rkadr7sdqkqv"
-path="res://.godot/imported/gmtkCoin.png-abf36b2e57ec0b8b415e908ce5d30073.ctex"
+path="res://.godot/imported/gmtk_coin.png-0810ec74600d959552918fc4f2d4c05b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/image/gmtkCoin.png"
-dest_files=["res://.godot/imported/gmtkCoin.png-abf36b2e57ec0b8b415e908ce5d30073.ctex"]
+source_file="res://asset/image/gmtk_coin.png"
+dest_files=["res://.godot/imported/gmtk_coin.png-0810ec74600d959552918fc4f2d4c05b.ctex"]
 
 [params]
 

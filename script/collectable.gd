@@ -5,7 +5,7 @@ signal collected
 @onready var sprite = get_node("Sprite2D")
 
 func _on_body_entered(body):
-	if(body is Penguin):
+	if body is Penguin:
 		_on_collected()
 	
 func _on_collected():
