@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cptkwbxtnybkt"]
+[gd_scene load_steps=7 format=3 uid="uid://cptkwbxtnybkt"]
 
 [ext_resource type="Texture2D" uid="uid://dcwxirkllxl57" path="res://asset/image/background.png" id="1_bya88"]
 [ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="1_jtmkg"]
 [ext_resource type="PackedScene" uid="uid://dtmycdb0xitq2" path="res://object/terrain.tscn" id="2_72ag4"]
 [ext_resource type="PackedScene" uid="uid://c55md7bv37dmb" path="res://object/collectable.tscn" id="3_pcn2r"]
-[ext_resource type="Script" path="res://coin_counter.gd" id="4_3udq4"]
+[ext_resource type="PackedScene" uid="uid://3nnkeci2evuw" path="res://object/feather.tscn" id="5_arexu"]
+[ext_resource type="Script" path="res://script/coin_counter.gd" id="5_cfewx"]
 
 [node name="World" type="Node2D"]
 
@@ -34,6 +35,9 @@ limit_bottom = 100
 [node name="Collectable" parent="." instance=ExtResource("3_pcn2r")]
 position = Vector2(2152, 1996)
 
+[node name="Feather" parent="." instance=ExtResource("5_arexu")]
+position = Vector2(3176, 1886)
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -46,6 +50,6 @@ offset_right = 770.0
 offset_bottom = 318.0
 theme_override_font_sizes/font_size = 231
 text = "0 coins"
-script = ExtResource("4_3udq4")
+script = ExtResource("5_cfewx")
 
 [connection signal="collected_coin" from="Penguin" to="Control/Label" method="_on_penguin_collected_coin"]
