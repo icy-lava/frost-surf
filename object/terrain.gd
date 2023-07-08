@@ -43,18 +43,34 @@ func _physics_process(delta: float) -> void:
 #	if mouse_input and mouse_input.button_index == MOUSE_BUTTON_LEFT:
 #		apply_gravitation(mouse_input.global_position)
 
-func damp(from: float, to: float, smoothing: float, delta: float) -> float:
-	return lerp(from, to, 1.0 - pow(smoothing, delta))
-
 func apply_gravitation(global_position: Vector2, delta: float):
-	for i in range(0, Polygon.polygon.size() - 2): # last 2 points are the corners
-		var point := Polygon.polygon[i]
+	var points := Polygon.polygon.duplicate()
+	var min_i: int
+	var max_i: int
+	for i in range(0, points.size() - 2): # last 2 points are the corners
+		var point := points[i]
 		var delta_pos := global_position - point
 		var dist2 := delta_pos.length_squared()
 		if absf(delta_pos.x) < max_modify_distance:
+			min_i = mini(min_i, i)
+			max_i = maxi(max_i, i)
 			var effect_amp := 1.0 - absf(delta_pos.x) / max_modify_distance
 			effect_amp = effect_falloff.sample(effect_amp)
 #			var effect_delta = effect_amp * delta * modify_speed
 #			point.y = move_toward(point.y, global_position.y, effect_delta)
-			point = Game.damp(point, Vector2(point.x, global_position.y), 0.5 * 2 ** (-5 * effect_amp), delta)
-			Polygon.polygon[i] = point
+			var limit: float = 200
+			var diff := clampf(global_position.y - point.y, -limit, limit)
+			point.y = Game.dampf(point.y, point.y + diff, 0.5 * 2 ** (-5 * effect_amp), delta)
+			points[i] = point
+	var range_i := max_i - min_i + 1
+	min_i -= range_i / 2
+	max_i += range_i / 2
+	for i in range(max(min_i, 0), min(max_i, points.size() - 2)):
+		var a := points[i]
+		var b := points[i + 1]
+		var common: float = (a.y + b.y) / 2
+		a.y = Game.dampf(a.y, common, 0.5, delta)
+		b.y = Game.dampf(b.y, common, 0.5, delta)
+		points[i] = a
+		points[i + 1] = b
+	Polygon.polygon = points
