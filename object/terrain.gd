@@ -1,6 +1,7 @@
 extends Path2D
 class_name Terrain
 
+@export var Drawable: Polygon2D
 @export var Polygon: CollisionPolygon2D
 @export var effect_falloff: Curve
 
@@ -30,6 +31,7 @@ func generate_from_curve(curve: Curve2D) -> void:
 	points.append(first_point)
 	
 	Polygon.polygon = points
+	Drawable.polygon = points
 
 func _ready() -> void:
 	generate_from_curve(curve)
@@ -37,11 +39,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		apply_gravitation(get_global_mouse_position(), delta)
-
-#func _input(event: InputEvent) -> void:
-#	var mouse_input := event as InputEventMouseButton
-#	if mouse_input and mouse_input.button_index == MOUSE_BUTTON_LEFT:
-#		apply_gravitation(mouse_input.global_position)
 
 func apply_gravitation(global_position: Vector2, delta: float):
 	var points := Polygon.polygon.duplicate()
@@ -56,8 +53,6 @@ func apply_gravitation(global_position: Vector2, delta: float):
 			max_i = maxi(max_i, i)
 			var effect_amp := 1.0 - absf(delta_pos.x) / max_modify_distance
 			effect_amp = effect_falloff.sample(effect_amp)
-#			var effect_delta = effect_amp * delta * modify_speed
-#			point.y = move_toward(point.y, global_position.y, effect_delta)
 			var limit: float = 200
 			var diff := clampf(global_position.y - point.y, -limit, limit)
 			point.y = Game.dampf(point.y, point.y + diff, 0.5 * 2 ** (-5 * effect_amp), delta)
@@ -69,8 +64,9 @@ func apply_gravitation(global_position: Vector2, delta: float):
 		var a := points[i]
 		var b := points[i + 1]
 		var common: float = (a.y + b.y) / 2
-		a.y = Game.dampf(a.y, common, 0.5, delta)
-		b.y = Game.dampf(b.y, common, 0.5, delta)
+		a.y = Game.dampf(a.y, common, 0.1, delta)
+		b.y = Game.dampf(b.y, common, 0.1, delta)
 		points[i] = a
 		points[i + 1] = b
 	Polygon.polygon = points
+	Drawable.polygon = points
