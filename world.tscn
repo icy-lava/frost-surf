@@ -1,9 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://cptkwbxtnybkt"]
 
-[ext_resource type="Texture2D" uid="uid://dctnn01ggfqvf" path="res://icon.svg" id="1_af08s"]
+[ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="1_jtmkg"]
 
 [node name="World" type="Node2D"]
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(192, 192)
-texture = ExtResource("1_af08s")
+[node name="Penguin" parent="." instance=ExtResource("1_jtmkg")]
+position = Vector2(1824, 1680)
+floor_stop_on_slope = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 2160, 0, 1920, 336, 1848, 498, 1830, 637, 1843, 817, 1866, 1011, 1934, 1195, 2013, 1487, 2053, 1747, 2011, 1949, 1919, 1893, 2193)
