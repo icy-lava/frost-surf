@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cptkwbxtnybkt"]
+[gd_scene load_steps=3 format=3 uid="uid://cptkwbxtnybkt"]
 
 [ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="1_jtmkg"]
+[ext_resource type="PackedScene" uid="uid://b1dbl06q7q748" path="res://collectable.tscn" id="2_vjfgx"]
 
 [node name="World" type="Node2D"]
 
@@ -12,3 +13,6 @@ floor_stop_on_slope = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(0, 2160, 0, 1920, 336, 1848, 498, 1830, 637, 1843, 817, 1866, 1011, 1934, 1195, 2013, 1487, 2053, 1747, 2011, 1949, 1919, 1893, 2193)
+
+[node name="Collectable" parent="." instance=ExtResource("2_vjfgx")]
+position = Vector2(1323, 1895)
