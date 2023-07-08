@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://oto046y75skc" path="res://object/feather.tscn" id="5_arexu"]
 [ext_resource type="Script" path="res://script/coin_counter.gd" id="5_cfewx"]
 
-[sub_resource type="Curve2D" id="Curve2D_adsdd"]
+[sub_resource type="Curve2D" id="Curve2D_l72n6"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 1464, -302.642, 8.48528, 302.642, -8.48528, 576, 1656, -178.191, -36.7696, 178.191, 36.7696, 1464, 1896, -229.103, -8.48528, 229.103, 8.48528, 2184, 2112, -95.1166, 52.6062, 95.1166, -52.6062, 2862, 1957, -120.204, 1.02158, 120.204, -1.02158, 3294, 1884, -76.4283, 81.8389, 76.4283, -81.8389, 3631, 1730, -109.781, -1.09101, 109.781, 1.09101, 3876, 1644, -221.906, -3.27283, 221.906, 3.27283, 4529, 1752, -253.86, 111.089, 253.86, -111.089, 5537, 1614, -69.3299, -0.464832, 69.3299, 0.464832, 6014, 1267, -100.872, -207.78, 100.872, 207.78, 6322, 1848, -206.326, -2.44901, 206.326, 2.44901, 7003, 2087, 0, 0, 0, 0, 7628, 1999)
@@ -19,8 +19,8 @@ point_count = 14
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.1, 0.1)
-motion_mirroring = Vector2(9955, 0)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(9960, 0)
 
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_repeat = 2
@@ -39,7 +39,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("2_72ag4")]
-curve = SubResource("Curve2D_adsdd")
+curve = SubResource("Curve2D_l72n6")
 
 [node name="Collectable" parent="." instance=ExtResource("3_pcn2r")]
 position = Vector2(2152, 1996)
