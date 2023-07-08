@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c55md7bv37dmb"]
+[gd_scene load_steps=7 format=3 uid="uid://oto046y75skc"]
 
-[ext_resource type="Script" path="res://object/collectable.gd" id="1_h6jkt"]
-[ext_resource type="Texture2D" uid="uid://culimtyep1nfe" path="res://asset/image/fish.png" id="2_tfk7w"]
+[ext_resource type="Script" path="res://object/feather.gd" id="1_g5ep4"]
+[ext_resource type="Texture2D" uid="uid://vd2s5f8l80ru" path="res://asset/image/feather.png" id="2_x7by2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lfam"]
 radius = 50.0
@@ -81,19 +81,18 @@ _data = {
 "collectable_animation": SubResource("Animation_tl2nr")
 }
 
-[node name="Collectable" type="Area2D"]
-script = ExtResource("1_h6jkt")
+[node name="Feather" type="Area2D"]
+script = ExtResource("1_g5ep4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5lfam")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
-texture = ExtResource("2_tfk7w")
+texture = ExtResource("2_x7by2")
 
 [node name="CollectableAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_m41tj")
 }
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]

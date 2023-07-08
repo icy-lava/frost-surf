@@ -24,3 +24,6 @@ func _physics_process(delta: float) -> void:
 
 func collect_coin():
 	emit_signal("collected_coin")
+
+func collect_feather():
+	velocity.y = -500.0
