@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://oto046y75skc" path="res://object/feather.tscn" id="5_arexu"]
 [ext_resource type="Script" path="res://script/coin_counter.gd" id="5_cfewx"]
 
-[sub_resource type="Curve2D" id="Curve2D_1b3qr"]
+[sub_resource type="Curve2D" id="Curve2D_5n2f8"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 1464, -302.642, 8.48528, 302.642, -8.48528, 576, 1656, -178.191, -36.7696, 178.191, 36.7696, 1464, 1896, -229.103, -8.48528, 229.103, 8.48528, 2184, 2112, 0, 0, 0, 0, 2784, 1920)
@@ -38,7 +38,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("2_72ag4")]
-curve = SubResource("Curve2D_1b3qr")
+curve = SubResource("Curve2D_5n2f8")
 
 [node name="Collectable" parent="." instance=ExtResource("3_pcn2r")]
 position = Vector2(2152, 1996)
