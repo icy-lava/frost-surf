@@ -11,6 +11,9 @@ var previous_window_mode := DisplayServer.window_get_mode()
 func _ready() -> void:
 	randomize()
 
+func dampf(from: float, to: float, smoothing: float, delta: float) -> float:
+	return lerp(from, to, 1.0 - pow(smoothing, delta))
+
 func damp(from: Vector2, to: Vector2, smoothing: float, delta: float) -> Vector2:
 	return lerp(from, to, 1.0 - pow(smoothing, delta))
 

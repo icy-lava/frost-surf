@@ -22,4 +22,3 @@ effect_falloff = SubResource("Curve_4unjt")
 [node name="Body" type="StaticBody2D" parent="."]
 
 [node name="Polygon" type="CollisionPolygon2D" parent="Body"]
-build_mode = 1
