@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://7vffqdrk8ikj"]
+
+[ext_resource type="Texture2D" uid="uid://vr5u3fhjo4ro" path="res://asset/image/crack_top/0.png" id="1_03abp"]
+[ext_resource type="Texture2D" uid="uid://caxjx0ctvu0p6" path="res://asset/image/crack_top/1.png" id="2_oi85e"]
+[ext_resource type="Texture2D" uid="uid://dklvqevspwxke" path="res://asset/image/crack_top/2.png" id="3_rf6av"]
+[ext_resource type="Texture2D" uid="uid://cfllauodq2vw2" path="res://asset/image/crack_top/3.png" id="4_06iat"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lb2ie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_03abp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_oi85e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rf6av")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_06iat")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_8nman"]
+script/source = "extends AnimatedSprite2D
+
+func _ready() -> void:
+	frame = randi_range(0, sprite_frames.get_frame_count(\"default\") - 1)
+"
+
+[node name="Crack" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_lb2ie")
+offset = Vector2(0, 1080)
+script = SubResource("GDScript_8nman")

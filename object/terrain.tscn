@@ -25,5 +25,6 @@ effect_falloff = SubResource("Curve_4unjt")
 [node name="Polygon" type="CollisionPolygon2D" parent="Body"]
 
 [node name="Drawable" type="Polygon2D" parent="."]
+clip_children = 2
 color = Color(0.654902, 0.839216, 0.933333, 1)
 antialiased = true

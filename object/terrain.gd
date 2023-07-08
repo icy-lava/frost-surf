@@ -8,6 +8,14 @@ class_name Terrain
 const max_modify_distance: float = 500
 const min_interval: float = 50
 const large: float = 10000
+const mouse_y_margin := 100
+
+const min_crack_interval: float = 400
+const max_crack_interval: float = 700
+
+var all_points: PackedVector2Array
+var start_x: float
+var end_x: float
 
 func generate_from_curve(curve: Curve2D) -> void:
 	var last_x: float = -min_interval
@@ -16,9 +24,11 @@ func generate_from_curve(curve: Curve2D) -> void:
 	
 	# Add surface points
 	for point in baked_points:
-		if point.x > last_x + min_interval:
+		if point.x >= last_x + min_interval:
 			points.append(point)
 			last_x = point.x
+	start_x = points[0].x
+	end_x = points[points.size() - 1].x
 	
 	# Bottom right corner
 	var last_point := points[points.size() - 1]
@@ -32,6 +42,16 @@ func generate_from_curve(curve: Curve2D) -> void:
 	
 	Polygon.polygon = points
 	Drawable.polygon = points
+	
+	for child in Drawable.get_children():
+		remove_child(child)
+	
+	var crack_x: float = randf_range(0, min_crack_interval)
+	while crack_x < end_x:
+		var crack := preload("res://object/crack.tscn").instantiate()
+		crack.position.x = crack_x
+		Drawable.add_child(crack)
+		crack_x += randf_range(min_crack_interval, max_crack_interval)
 
 func _ready() -> void:
 	generate_from_curve(curve)
@@ -41,6 +61,9 @@ func _physics_process(delta: float) -> void:
 		apply_gravitation(get_global_mouse_position(), delta)
 
 func apply_gravitation(global_position: Vector2, delta: float):
+	# Limit to what y level we can go
+	global_position.y = clamp(global_position.y, 0 + mouse_y_margin, 2160 - mouse_y_margin)
+	
 	var points := Polygon.polygon.duplicate()
 	var min_i: int
 	var max_i: int
@@ -60,7 +83,7 @@ func apply_gravitation(global_position: Vector2, delta: float):
 	var range_i := max_i - min_i + 1
 	min_i -= range_i / 2
 	max_i += range_i / 2
-	for i in range(max(min_i, 0), min(max_i, points.size() - 2)):
+	for i in range(max(min_i, 0), min(max_i, points.size() - 3)):
 		var a := points[i]
 		var b := points[i + 1]
 		var common: float = (a.y + b.y) / 2
