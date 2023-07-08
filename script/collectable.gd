@@ -13,5 +13,6 @@ func _on_collected():
 	tween.tween_property(self, "position", Vector2.UP * 200, 0.5).as_relative()
 	tween.parallel().tween_property(sprite, "modulate", Color(1,1,1,0), 0.5)
 	emit_signal("collected")
+	queue_free()
 	print("COIN!")
 	
