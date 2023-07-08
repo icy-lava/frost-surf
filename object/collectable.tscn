@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c55md7bv37dmb"]
 
 [ext_resource type="Script" path="res://object/collectable.gd" id="1_h6jkt"]
-[ext_resource type="Texture2D" uid="uid://rkadr7sdqkqv" path="res://asset/image/gmtk_coin.png" id="2_5as3j"]
+[ext_resource type="Texture2D" uid="uid://culimtyep1nfe" path="res://asset/image/fish.png" id="2_tfk7w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lfam"]
 radius = 50.0
@@ -88,7 +88,8 @@ script = ExtResource("1_h6jkt")
 shape = SubResource("CircleShape2D_5lfam")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_5as3j")
+rotation = 1.5708
+texture = ExtResource("2_tfk7w")
 
 [node name="CollectableAnimation" type="AnimationPlayer" parent="."]
 libraries = {
