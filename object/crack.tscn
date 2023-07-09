@@ -28,8 +28,16 @@ animations = [{
 [sub_resource type="GDScript" id="GDScript_8nman"]
 script/source = "extends AnimatedSprite2D
 
+static var last_crack_frame: int = -1
+
 func _ready() -> void:
-	frame = randi_range(0, sprite_frames.get_frame_count(\"default\") - 1)
+	var count: int = sprite_frames.get_frame_count(\"default\")
+	assert(count > 1)
+	var picked: int = last_crack_frame
+	while picked == last_crack_frame:
+		picked = randi_range(0, count - 1)
+	last_crack_frame = picked
+	frame = picked	
 "
 
 [node name="Crack" type="AnimatedSprite2D"]
