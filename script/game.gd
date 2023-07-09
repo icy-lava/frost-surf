@@ -62,6 +62,9 @@ func play_sound(sound: AudioStreamPlayer, octave_range: float) -> void:
 func get_penguin() -> Penguin:
 	return get_tree().get_nodes_in_group("penguin")[0]
 
+func get_water_y() -> float:
+	return 2160 * 0.8
+
 func get_scale() -> float:
 	var screen_size = get_tree().get_root().size
 	var set_width = ProjectSettings.get("display/window/size/width")
