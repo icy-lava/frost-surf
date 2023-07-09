@@ -1,17 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://c55md7bv37dmb"]
+[gd_scene load_steps=6 format=3 uid="uid://c55md7bv37dmb"]
 
 [ext_resource type="Script" path="res://object/collectable.gd" id="1_h6jkt"]
-[ext_resource type="Texture2D" uid="uid://culimtyep1nfe" path="res://asset/image/fish.png" id="2_tfk7w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lfam"]
-radius = 50.0
+radius = 96.0
 
 [sub_resource type="Animation" id="Animation_bkmrh"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +22,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/path = NodePath("Sprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,7 +38,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +50,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/path = NodePath("Sprite:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -81,19 +80,19 @@ _data = {
 "collectable_animation": SubResource("Animation_tl2nr")
 }
 
-[node name="Collectable" type="Area2D"]
+[node name="Collectable" type="Area2D" node_paths=PackedStringArray("Anim", "Sprite")]
 script = ExtResource("1_h6jkt")
+Anim = NodePath("CollectableAnimation")
+Sprite = NodePath("Sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5lfam")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 1.5708
-texture = ExtResource("2_tfk7w")
 
 [node name="CollectableAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_m41tj")
 }
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

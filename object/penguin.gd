@@ -1,10 +1,11 @@
 extends CharacterBody2D
 class_name Penguin
 
-signal collected_coin
+signal collected_fish
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+const feather_boost: float = 800
 
 @export var Sprite: Sprite2D
 
@@ -22,8 +23,9 @@ func _physics_process(delta: float) -> void:
 	var new_rotation_vector := Game.damp(current_rotation_vector, target_rotation_vector, 0.01, delta)
 	Sprite.rotation = new_rotation_vector.angle()
 
-func collect_coin():
-	emit_signal("collected_coin")
-
-func collect_feather():
-	velocity.y = -500.0
+func collect_item(item: Collectable) -> void:
+	match item.kind:
+		Collectable.Kind.Fish:
+			collected_fish.emit()
+		Collectable.Kind.Feather:
+			velocity.y = -feather_boost

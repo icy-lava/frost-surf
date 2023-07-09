@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://b48qqyhi3eprh" path="res://asset/image/background.png" id="1_bya88"]
 [ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="1_jtmkg"]
 [ext_resource type="PackedScene" uid="uid://dtmycdb0xitq2" path="res://object/terrain.tscn" id="2_72ag4"]
-[ext_resource type="PackedScene" uid="uid://c55md7bv37dmb" path="res://object/collectable.tscn" id="3_pcn2r"]
+[ext_resource type="PackedScene" uid="uid://cjy4jiomrciuy" path="res://object/fish.tscn" id="4_unj36"]
 [ext_resource type="PackedScene" uid="uid://oto046y75skc" path="res://object/feather.tscn" id="5_arexu"]
-[ext_resource type="Script" path="res://script/coin_counter.gd" id="5_cfewx"]
+[ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="6_2u2dn"]
 
-[sub_resource type="Curve2D" id="Curve2D_l72n6"]
+[sub_resource type="Curve2D" id="Curve2D_jyfo0"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 1464, -302.642, 8.48528, 302.642, -8.48528, 576, 1656, -178.191, -36.7696, 178.191, 36.7696, 1464, 1896, -229.103, -8.48528, 229.103, 8.48528, 2184, 2112, -95.1166, 52.6062, 95.1166, -52.6062, 2862, 1957, -120.204, 1.02158, 120.204, -1.02158, 3294, 1884, -76.4283, 81.8389, 76.4283, -81.8389, 3631, 1730, -109.781, -1.09101, 109.781, 1.09101, 3876, 1644, -221.906, -3.27283, 221.906, 3.27283, 4529, 1752, -253.86, 111.089, 253.86, -111.089, 5537, 1614, -69.3299, -0.464832, 69.3299, 0.464832, 6014, 1267, -100.872, -207.78, 100.872, 207.78, 6322, 1848, -206.326, -2.44901, 206.326, 2.44901, 7003, 2087, 0, 0, 0, 0, 7628, 1999)
@@ -39,26 +39,14 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("2_72ag4")]
-curve = SubResource("Curve2D_l72n6")
+curve = SubResource("Curve2D_jyfo0")
 
-[node name="Collectable" parent="." instance=ExtResource("3_pcn2r")]
-position = Vector2(2152, 1996)
+[node name="Fish" parent="." instance=ExtResource("4_unj36")]
+position = Vector2(744, 1512)
 
 [node name="Feather" parent="." instance=ExtResource("5_arexu")]
 position = Vector2(3176, 1886)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 1
-offset_right = 770.0
-offset_bottom = 318.0
-theme_override_font_sizes/font_size = 231
-text = "0 coins"
-script = ExtResource("5_cfewx")
-
-[connection signal="collected_coin" from="Penguin" to="Control/Label" method="_on_penguin_collected_coin"]
+[node name="CoinCounter" parent="HUD" instance=ExtResource("6_2u2dn")]

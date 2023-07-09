@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ypf1c"]
 radius = 56.0089
 
-[node name="Penguin" type="CharacterBody2D" node_paths=PackedStringArray("Sprite")]
+[node name="Penguin" type="CharacterBody2D" node_paths=PackedStringArray("Sprite") groups=["penguin"]]
 script = ExtResource("1_v1bn4")
 Sprite = NodePath("Sprite")
 
