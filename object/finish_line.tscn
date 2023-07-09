@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dldawl6et5j6h"]
+
+[ext_resource type="Script" path="res://object/finish_line.gd" id="1_mak4j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_camaw"]
+size = Vector2(2000, 5000)
+
+[node name="FinishLine" type="Area2D"]
+script = ExtResource("1_mak4j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_camaw")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-1000, 0)
+points = PackedVector2Array(0, -2500, 0, 2500)
+width = 30.0
+default_color = Color(1, 1, 1, 0.458824)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

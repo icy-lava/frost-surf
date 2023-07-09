@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://tvryxgw1tiou"]
+[gd_scene load_steps=8 format=3 uid="uid://tvryxgw1tiou"]
 
 [ext_resource type="Texture2D" uid="uid://b48qqyhi3eprh" path="res://asset/image/background.png" id="1_an3j7"]
 [ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="2_burck"]
 [ext_resource type="PackedScene" uid="uid://dtmycdb0xitq2" path="res://object/terrain.tscn" id="3_2wyr3"]
 [ext_resource type="PackedScene" uid="uid://cjy4jiomrciuy" path="res://object/fish.tscn" id="4_rkjey"]
+[ext_resource type="PackedScene" uid="uid://dldawl6et5j6h" path="res://object/finish_line.tscn" id="6_2f04q"]
 [ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="6_v1le8"]
 
-[sub_resource type="Curve2D" id="Curve2D_x8h85"]
+[sub_resource type="Curve2D" id="Curve2D_do2n8"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 1683, 1468, 0, 0, 0, 0, 19782, 1454, 0, 0, 0, 0, 19777, 2168)
@@ -38,7 +39,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_2wyr3")]
-curve = SubResource("Curve2D_x8h85")
+curve = SubResource("Curve2D_do2n8")
 
 [node name="Fish" parent="." instance=ExtResource("4_rkjey")]
 position = Vector2(4047, 1350)
@@ -67,3 +68,6 @@ position = Vector2(12184, 1050)
 
 [node name="Fish8" parent="." instance=ExtResource("4_rkjey")]
 position = Vector2(11239, 1617)
+
+[node name="FinishLine" parent="." instance=ExtResource("6_2f04q")]
+position = Vector2(19053, 1125)

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="6_2u2dn"]
 [ext_resource type="PackedScene" uid="uid://nbffwtqrofws" path="res://object/fish_spawner.tscn" id="6_p0jce"]
 
-[sub_resource type="Curve2D" id="Curve2D_chvve"]
+[sub_resource type="Curve2D" id="Curve2D_82v64"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 1464, -302.642, 8.48528, 302.642, -8.48528, 576, 1656, -178.191, -36.7696, 178.191, 36.7696, 1464, 1896, -229.103, -8.48528, 229.103, 8.48528, 2184, 2112, -95.1166, 52.6062, 95.1166, -52.6062, 2862, 1957, -120.204, 1.02158, 120.204, -1.02158, 3294, 1884, -76.4283, 81.8389, 76.4283, -81.8389, 3631, 1730, -109.781, -1.09101, 109.781, 1.09101, 3876, 1644, -221.906, -3.27283, 221.906, 3.27283, 4529, 1752, -253.86, 111.089, 253.86, -111.089, 5537, 1614, -69.3299, -0.464832, 69.3299, 0.464832, 6014, 1267, -100.872, -207.78, 100.872, 207.78, 6322, 1848, -206.326, -2.44901, 206.326, 2.44901, 7003, 2087, 0, 0, 0, 0, 7628, 1999)
@@ -41,7 +41,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("2_72ag4")]
-curve = SubResource("Curve2D_chvve")
+curve = SubResource("Curve2D_82v64")
 
 [node name="Fish" parent="." instance=ExtResource("4_unj36")]
 position = Vector2(744, 1512)
