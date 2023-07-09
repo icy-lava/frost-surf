@@ -7,6 +7,7 @@
 radius = 53.0094
 
 [node name="Penguin" type="CharacterBody2D" node_paths=PackedStringArray("Sprite") groups=["penguin"]]
+collision_mask = 3
 script = ExtResource("1_v1bn4")
 Sprite = NodePath("Sprite")
 

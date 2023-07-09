@@ -7,6 +7,7 @@ class_name Collectable
 enum Kind {
 	None,
 	Fish,
+	BoostFish,
 	Feather
 }
 
@@ -34,3 +35,8 @@ func _on_body_entered(body):
 	if penguin:
 		Anim.play("collectable_animation")
 		penguin.collect_item(self)
+
+
+func _on_collectable_animation_animation_finished(anim_name):
+	if anim_name == "collectable_animation":
+		queue_free()
