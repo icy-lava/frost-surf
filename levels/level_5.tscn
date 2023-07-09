@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dfb6u1ahuntar" path="res://object/boulder.tscn" id="10_1t63c"]
 [ext_resource type="PackedScene" uid="uid://cjy4jiomrciuy" path="res://object/fish.tscn" id="11_goc04"]
 
-[sub_resource type="Curve2D" id="Curve2D_ywlfb"]
+[sub_resource type="Curve2D" id="Curve2D_2l22k"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 2034, 1674, -313.899, 10.0414, 313.899, -10.0414, 3325, 1376, -217.474, -2.3811, 217.474, 2.3811, 3967, 1443, -544.966, -23.4717, 544.966, 23.4717, 4854, 1362, -1165.49, -40.3441, 1165.49, 40.3441, 7552, 1150, -816.009, 33.5573, 816.009, -33.5573, 9409, 1737, -438.499, 287.671, 438.499, -287.671, 10480, 610, -346.605, -28.925, 346.605, 28.925, 11766, 438, -239.744, -132.142, 239.744, 132.142, 12161, 1437, -523.375, -50.8542, 523.375, 50.8542, 13253, 1076, -695.333, -240.781, 695.333, 240.781, 14563, 1468, 0, 0, 0, 0, 27870, 1507, 0, 0, 0, 0, 28085, 2141)
@@ -79,14 +79,17 @@ limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_rqufs")]
 position = Vector2(70, -6)
-curve = SubResource("Curve2D_ywlfb")
+curve = SubResource("Curve2D_2l22k")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="CoinCounter" parent="HUD" instance=ExtResource("4_sk2q7")]
 
-[node name="FinishLine" parent="." instance=ExtResource("5_irveu")]
+[node name="FinishLine" parent="." node_paths=PackedStringArray("fish_counter") instance=ExtResource("5_irveu")]
 position = Vector2(18144, 1035)
+current_scene = null
+fishcount = 3
+fish_counter = NodePath("../HUD/CoinCounter")
 
 [node name="WaterForeground" type="ParallaxBackground" parent="."]
 layer = 100

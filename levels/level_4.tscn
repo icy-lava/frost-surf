@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://i4705ggex7ct" path="res://asset/image/water_diffuse.png" id="10_8qlyf"]
 [ext_resource type="Texture2D" uid="uid://cecs31aylt2hl" path="res://asset/image/water_normal.png" id="11_6yf7x"]
 
-[sub_resource type="Curve2D" id="Curve2D_n73ft"]
+[sub_resource type="Curve2D" id="Curve2D_ukwu1"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 1634, 1285, -385.645, -23.3082, 385.645, 23.3082, 2691, 1073, -857.684, 3.51416, 857.684, -3.51416, 4263, 1550, -970.328, 443.317, 970.328, -443.317, 7164, 1708, -328.434, -2.11893, 328.434, 2.11893, 8336, 1755, -315.72, -76.2813, 315.72, 76.2813, 9010, 1711, -177.99, 93.2327, 177.99, -93.2327, 9830, 1348, -346.605, -28.925, 346.605, 28.925, 10586, 1670, -523.375, -50.8542, 523.375, 50.8542, 12394, 1007, -695.333, -240.781, 695.333, 240.781, 13661, 1408, 0, 0, 0, 0, 27681, 1428, 0, 0, 0, 0, 27717, 2165)
@@ -77,7 +77,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_1bexm")]
-curve = SubResource("Curve2D_n73ft")
+curve = SubResource("Curve2D_ukwu1")
 
 [node name="Fish" parent="." instance=ExtResource("4_qnpv4")]
 position = Vector2(5813, 799)
@@ -104,9 +104,12 @@ position = Vector2(12251, 1163)
 [node name="Fish7" parent="." instance=ExtResource("4_qnpv4")]
 position = Vector2(12486, 1163)
 
-[node name="FinishLine" parent="." instance=ExtResource("6_dw4y8")]
+[node name="FinishLine" parent="." node_paths=PackedStringArray("fish_counter") instance=ExtResource("6_dw4y8")]
 position = Vector2(18144, 1035)
 transition_scene = ExtResource("7_coatj")
+current_scene = null
+fishcount = 8
+fish_counter = NodePath("../HUD/CoinCounter")
 
 [node name="WaterForeground" type="ParallaxBackground" parent="."]
 layer = 100
