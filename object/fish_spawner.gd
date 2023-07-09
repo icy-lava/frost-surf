@@ -5,4 +5,4 @@ extends Node2D
 func _on_fish_spawner_body_entered(body):
 	if body is Penguin:
 		var fish = fish_scene.instantiate()
-		add_child(fish)
+		call_deferred("add_child", fish)
