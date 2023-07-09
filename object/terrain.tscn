@@ -13,12 +13,19 @@ point_count = 5
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Terrain" type="Path2D" node_paths=PackedStringArray("Polygon")]
+[node name="Terrain" type="Path2D" node_paths=PackedStringArray("Drawable", "Polygon")]
+z_index = -4096
 curve = SubResource("Curve2D_cx5ah")
 script = ExtResource("1_yfpvp")
+Drawable = NodePath("Drawable")
 Polygon = NodePath("Body/Polygon")
 effect_falloff = SubResource("Curve_4unjt")
 
 [node name="Body" type="StaticBody2D" parent="."]
 
 [node name="Polygon" type="CollisionPolygon2D" parent="Body"]
+
+[node name="Drawable" type="Polygon2D" parent="."]
+clip_children = 2
+color = Color(0.654902, 0.839216, 0.933333, 1)
+antialiased = true

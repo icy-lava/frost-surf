@@ -59,6 +59,9 @@ func play_sound(sound: AudioStreamPlayer, octave_range: float) -> void:
 	clone.pitch_scale = pow(2, randf_range(-octave_range, octave_range))
 	clone.play()
 
+func get_penguin() -> Penguin:
+	return get_tree().get_nodes_in_group("penguin")[0]
+
 func get_scale() -> float:
 	var screen_size = get_tree().get_root().size
 	var set_width = ProjectSettings.get("display/window/size/width")

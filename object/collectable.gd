@@ -1,19 +1,36 @@
 extends Area2D
+class_name Collectable
 
-@onready var sprite = get_node("Sprite2D")
-@onready var animation = $CollectableAnimation
+@export var Anim: AnimationPlayer
+@export var Sprite: AnimatedSprite2D
+
+enum Kind {
+	None,
+	Fish,
+	Feather
+}
+
+@export var kind: Kind = Kind.None
+
+func _ready() -> void:
+	assert(kind != Kind.None, "Collectable of Kind.None should never be instantiated")
+	set_random_sprite()
+	Anim.seek(randf_range(0, Anim.current_animation_length))
+
+func get_sprite_count() -> int:
+	if Sprite.sprite_frames:
+		return Sprite.sprite_frames.get_frame_count("default")
+	return 0
+
+func set_sprite_by_index(i: int) -> void:
+	Sprite.frame = i
+
+func set_random_sprite() -> void:
+	if get_sprite_count() > 0:
+		set_sprite_by_index(randi_range(0, get_sprite_count() - 1))
 
 func _on_body_entered(body):
-	if body is Penguin:
-		_on_collected()
-		body.collect_coin()
-	
-func _on_collected():
-	animation.play("collectable_animation")
-	print("COIN!")
-	# --- unused shit code ---
-	#var tween := create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-	#tween.tween_property(self, "position", Vector2.UP * 200, 0.5).as_relative()
-	#tween.parallel().tween_property(sprite, "modulate", Color(1,1,1,0), 0.5)
-	#queue_free()
-	
+	var penguin := body as Penguin
+	if penguin:
+		Anim.play("collectable_animation")
+		penguin.collect_item(self)

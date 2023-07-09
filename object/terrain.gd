@@ -1,12 +1,21 @@
 extends Path2D
 class_name Terrain
 
+@export var Drawable: Polygon2D
 @export var Polygon: CollisionPolygon2D
 @export var effect_falloff: Curve
 
 const max_modify_distance: float = 500
 const min_interval: float = 50
 const large: float = 10000
+const mouse_y_margin := 100
+
+const min_crack_interval: float = 400
+const max_crack_interval: float = 700
+
+var all_points: PackedVector2Array
+var start_x: float
+var end_x: float
 
 func generate_from_curve(curve: Curve2D) -> void:
 	var last_x: float = -min_interval
@@ -15,9 +24,11 @@ func generate_from_curve(curve: Curve2D) -> void:
 	
 	# Add surface points
 	for point in baked_points:
-		if point.x > last_x + min_interval:
+		if point.x >= last_x + min_interval:
 			points.append(point)
 			last_x = point.x
+	start_x = points[0].x
+	end_x = points[points.size() - 1].x
 	
 	# Bottom right corner
 	var last_point := points[points.size() - 1]
@@ -30,6 +41,17 @@ func generate_from_curve(curve: Curve2D) -> void:
 	points.append(first_point)
 	
 	Polygon.polygon = points
+	Drawable.polygon = points
+	
+	for child in Drawable.get_children():
+		remove_child(child)
+	
+	var crack_x: float = randf_range(0, min_crack_interval)
+	while crack_x < end_x:
+		var crack := preload("res://object/crack.tscn").instantiate()
+		crack.position.x = crack_x
+		Drawable.add_child(crack)
+		crack_x += randf_range(min_crack_interval, max_crack_interval)
 
 func _ready() -> void:
 	generate_from_curve(curve)
@@ -38,12 +60,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		apply_gravitation(get_global_mouse_position(), delta)
 
-#func _input(event: InputEvent) -> void:
-#	var mouse_input := event as InputEventMouseButton
-#	if mouse_input and mouse_input.button_index == MOUSE_BUTTON_LEFT:
-#		apply_gravitation(mouse_input.global_position)
-
 func apply_gravitation(global_position: Vector2, delta: float):
+	# Limit to what y level we can go
+	global_position.y = clamp(global_position.y, 0 + mouse_y_margin, 2160 - mouse_y_margin)
+	
 	var points := Polygon.polygon.duplicate()
 	var min_i: int
 	var max_i: int
@@ -56,8 +76,6 @@ func apply_gravitation(global_position: Vector2, delta: float):
 			max_i = maxi(max_i, i)
 			var effect_amp := 1.0 - absf(delta_pos.x) / max_modify_distance
 			effect_amp = effect_falloff.sample(effect_amp)
-#			var effect_delta = effect_amp * delta * modify_speed
-#			point.y = move_toward(point.y, global_position.y, effect_delta)
 			var limit: float = 200
 			var diff := clampf(global_position.y - point.y, -limit, limit)
 			point.y = Game.dampf(point.y, point.y + diff, 0.5 * 2 ** (-5 * effect_amp), delta)
@@ -65,12 +83,13 @@ func apply_gravitation(global_position: Vector2, delta: float):
 	var range_i := max_i - min_i + 1
 	min_i -= range_i / 2
 	max_i += range_i / 2
-	for i in range(max(min_i, 0), min(max_i, points.size() - 2)):
+	for i in range(max(min_i, 0), min(max_i, points.size() - 3)):
 		var a := points[i]
 		var b := points[i + 1]
 		var common: float = (a.y + b.y) / 2
-		a.y = Game.dampf(a.y, common, 0.5, delta)
-		b.y = Game.dampf(b.y, common, 0.5, delta)
+		a.y = Game.dampf(a.y, common, 0.1, delta)
+		b.y = Game.dampf(b.y, common, 0.1, delta)
 		points[i] = a
 		points[i + 1] = b
 	Polygon.polygon = points
+	Drawable.polygon = points
