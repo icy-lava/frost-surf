@@ -1,0 +1,100 @@
+[gd_scene load_steps=16 format=3 uid="uid://ccvtovjbfaxti"]
+
+[ext_resource type="Texture2D" uid="uid://b48qqyhi3eprh" path="res://asset/image/background.png" id="1_yugf1"]
+[ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="2_aqrfw"]
+[ext_resource type="PackedScene" uid="uid://dtmycdb0xitq2" path="res://object/terrain.tscn" id="3_hhhf1"]
+[ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="5_ranw8"]
+[ext_resource type="PackedScene" uid="uid://dldawl6et5j6h" path="res://object/finish_line.tscn" id="6_pdx8g"]
+[ext_resource type="PackedScene" uid="uid://bl0ot1c3o7iws" path="res://levels/level_2.tscn" id="7_t7tm7"]
+[ext_resource type="Shader" path="res://water.gdshader" id="8_jqyfi"]
+[ext_resource type="Texture2D" uid="uid://dbddk1amiira2" path="res://asset/image/water_uv_offset.png" id="9_g0yjv"]
+[ext_resource type="Texture2D" uid="uid://i4705ggex7ct" path="res://asset/image/water_diffuse.png" id="10_tktr1"]
+[ext_resource type="Texture2D" uid="uid://cecs31aylt2hl" path="res://asset/image/water_normal.png" id="11_mpk8f"]
+
+[sub_resource type="Curve2D" id="Curve2D_cp1uh"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 1634, 1285, 0, 0, 0, 0, 68211, 1697, 0, 0, 0, 0, 68224, 2704)
+}
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_rmx4m"]
+offsets = PackedFloat32Array(0.37037, 0.548148, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.211765, 0.211765, 0.211765, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w3h4e"]
+gradient = SubResource("Gradient_rmx4m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmgvt"]
+shader = ExtResource("8_jqyfi")
+shader_parameter/water_tint = Color(0.22, 0.46, 0.73, 1)
+shader_parameter/shadow_color = Color(0.09, 0.11, 0.46, 1)
+shader_parameter/distortion_scale = Vector2(0.5, 0.5)
+shader_parameter/distortion_time_scale = 0.05
+shader_parameter/distortion_amplitude = 0.1
+shader_parameter/tile_factor = 10.0
+shader_parameter/water_time_scale = 0.1
+shader_parameter/reflection_intensity = 0.5
+shader_parameter/transform = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+shader_parameter/parallax_factor = 0.2
+shader_parameter/shore_color = Color(0.14, 0.41, 0.67, 1)
+shader_parameter/shore_size = 0.045
+shader_parameter/shore_smoothness = 0.008
+shader_parameter/shore_height_factor = 0.049
+shader_parameter/scale = Vector2(1, 1)
+shader_parameter/zoom_y = 1.0
+shader_parameter/aspect_ratio = 0.25
+shader_parameter/transition_gradient = SubResource("GradientTexture2D_w3h4e")
+shader_parameter/distortion_map = ExtResource("9_g0yjv")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_g4tdf"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("10_tktr1")
+normal_texture = ExtResource("11_mpk8f")
+texture_repeat = 3
+
+[node name="World" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(9960, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("1_yugf1")
+centered = false
+region_rect = Rect2(0, 0, 4000, 2160)
+
+[node name="Penguin" parent="." instance=ExtResource("2_aqrfw")]
+position = Vector2(982, 292)
+
+[node name="Camera2D" type="Camera2D" parent="Penguin"]
+position = Vector2(1200, 0)
+limit_top = 0
+limit_bottom = 100
+
+[node name="Terrain" parent="." instance=ExtResource("3_hhhf1")]
+curve = SubResource("Curve2D_cp1uh")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="CoinCounter" parent="HUD" instance=ExtResource("5_ranw8")]
+
+[node name="FinishLine" parent="." instance=ExtResource("6_pdx8g")]
+position = Vector2(53471, 969)
+transition_scene = ExtResource("7_t7tm7")
+
+[node name="WaterForeground" type="ParallaxBackground" parent="."]
+layer = 100
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="WaterForeground"]
+motion_mirroring = Vector2(5120, 0)
+
+[node name="Water" type="Sprite2D" parent="WaterForeground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_pmgvt")
+position = Vector2(0, 1700)
+scale = Vector2(20, 5)
+texture = SubResource("CanvasTexture_g4tdf")
+centered = false

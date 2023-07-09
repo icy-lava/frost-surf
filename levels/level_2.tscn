@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://i4705ggex7ct" path="res://asset/image/water_diffuse.png" id="10_egwpx"]
 [ext_resource type="Texture2D" uid="uid://cecs31aylt2hl" path="res://asset/image/water_normal.png" id="11_ugvtw"]
 
-[sub_resource type="Curve2D" id="Curve2D_7obph"]
+[sub_resource type="Curve2D" id="Curve2D_wfwul"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -429.103, -110.827, 429.103, 110.827, 1683, 1468, -841.228, 295.306, 841.228, -295.306, 3515, 1447, -923.156, -65.2328, 923.156, 65.2328, 5452, 365, -721.377, -171.561, 721.377, 171.561, 8527, 1473, -453.797, -119.509, 453.797, 119.509, 11438, 1266, -288.174, 36.0217, 288.174, -36.0217, 12512, 1758, -490.109, -192.768, 490.109, 192.768, 14410, 1494, -440.63, 213.588, 440.63, -213.588, 17376, 1554, 0, 0, 0, 0, 29390, 1426, 0, 0, 0, 0, 29513, 2178)
@@ -78,7 +78,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_6rbk2")]
-curve = SubResource("Curve2D_7obph")
+curve = SubResource("Curve2D_wfwul")
 
 [node name="Fish" parent="." instance=ExtResource("4_nm6u3")]
 position = Vector2(5020, 225)
