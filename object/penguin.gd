@@ -20,6 +20,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = abs(velocity.x)
 		global_position.x = 0
 	
+	# Slow down left movement
+	if velocity.x < 0:
+		velocity.x = Game.dampf(velocity.x, 0, 0.3, delta)
+	
 	# Gradual sprite rotation, based on velocity
 	var current_rotation_vector := Vector2.from_angle(Sprite.rotation)
 	var target_rotation_vector := velocity.normalized()
