@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bl0ot1c3o7iws"]
+[gd_scene load_steps=9 format=3 uid="uid://bl0ot1c3o7iws"]
 
 [ext_resource type="Texture2D" uid="uid://b48qqyhi3eprh" path="res://asset/image/background.png" id="1_mmlol"]
 [ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="2_4t56j"]
@@ -6,13 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://cjy4jiomrciuy" path="res://object/fish.tscn" id="4_nm6u3"]
 [ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="5_i31rq"]
 [ext_resource type="PackedScene" uid="uid://dldawl6et5j6h" path="res://object/finish_line.tscn" id="6_o1yhx"]
+[ext_resource type="PackedScene" uid="uid://oto046y75skc" path="res://object/feather.tscn" id="7_ryole"]
 
-[sub_resource type="Curve2D" id="Curve2D_1h7gx"]
+[sub_resource type="Curve2D" id="Curve2D_8sh5k"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 1683, 1468, 0, 0, 0, 0, 29390, 1426, 0, 0, 0, 0, 29513, 2178)
+"points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -429.103, -110.827, 429.103, 110.827, 1683, 1468, -841.228, 295.306, 841.228, -295.306, 3515, 1447, -923.156, -65.2328, 923.156, 65.2328, 5772, 547, -721.377, -171.561, 721.377, 171.561, 8527, 1473, -453.797, -119.509, 453.797, 119.509, 11438, 1266, -288.174, 36.0217, 288.174, -36.0217, 12512, 1758, -490.109, -192.768, 490.109, 192.768, 14410, 1494, -440.63, 213.588, 440.63, -213.588, 17376, 1554, 0, 0, 0, 0, 29390, 1426, 0, 0, 0, 0, 29513, 2178)
 }
-point_count = 5
+point_count = 12
 
 [node name="World" type="Node2D"]
 
@@ -37,35 +38,35 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_6rbk2")]
-curve = SubResource("Curve2D_1h7gx")
+curve = SubResource("Curve2D_8sh5k")
 
 [node name="Fish" parent="." instance=ExtResource("4_nm6u3")]
-position = Vector2(4767, 258)
+position = Vector2(5613, 292)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="CoinCounter" parent="HUD" instance=ExtResource("5_i31rq")]
 
 [node name="Fish2" parent="." instance=ExtResource("4_nm6u3")]
-position = Vector2(4982, 258)
+position = Vector2(5828, 292)
 
 [node name="Fish3" parent="." instance=ExtResource("4_nm6u3")]
-position = Vector2(7491, 1331)
+position = Vector2(9205, 1357)
 
 [node name="Fish4" parent="." instance=ExtResource("4_nm6u3")]
-position = Vector2(10174, 1258)
+position = Vector2(2680, 1371)
 
 [node name="Fish5" parent="." instance=ExtResource("4_nm6u3")]
-position = Vector2(10358, 1076)
+position = Vector2(2864, 1189)
 
 [node name="Fish6" parent="." instance=ExtResource("4_nm6u3")]
-position = Vector2(15452, 1261)
+position = Vector2(15442, 1302)
 
 [node name="Fish7" parent="." instance=ExtResource("4_nm6u3")]
 position = Vector2(13438, 857)
 
-[node name="Fish8" parent="." instance=ExtResource("4_nm6u3")]
-position = Vector2(10555, 912)
-
 [node name="FinishLine" parent="." instance=ExtResource("6_o1yhx")]
 position = Vector2(19053, 1125)
+
+[node name="Feather" parent="." instance=ExtResource("7_ryole")]
+position = Vector2(3060, 1028)
