@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://rkadr7sdqkqv" path="res://asset/image/gmtk_coin.png" id="2_dxthp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5lfam"]
-radius = 96.0
+radius = 125.0
 
 [sub_resource type="Animation" id="Animation_bkmrh"]
 length = 0.001

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cecs31aylt2hl" path="res://asset/image/water_normal.png" id="11_30x84"]
 [ext_resource type="PackedScene" uid="uid://dfb6u1ahuntar" path="res://object/boulder.tscn" id="12_85opy"]
 
-[sub_resource type="Curve2D" id="Curve2D_esggd"]
+[sub_resource type="Curve2D" id="Curve2D_fw1x3"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 2034, 1674, -313.899, 10.0414, 313.899, -10.0414, 3325, 1376, -217.474, -2.3811, 217.474, 2.3811, 3967, 1443, -544.966, -23.4717, 544.966, 23.4717, 4854, 1362, -1165.49, -40.3441, 1165.49, 40.3441, 6597, 1169, -328.434, -2.11893, 328.434, 2.11893, 8336, 1755, -438.499, 287.671, 438.499, -287.671, 9232, 689, -346.605, -28.925, 346.605, 28.925, 10431, 411, -239.744, -132.142, 239.744, 132.142, 10839, 1491, -523.375, -50.8542, 523.375, 50.8542, 12394, 1007, -695.333, -240.781, 695.333, 240.781, 13661, 1408, 0, 0, 0, 0, 19782, 1454, 0, 0, 0, 0, 19777, 2168)
@@ -79,7 +79,7 @@ limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_e0kxg")]
 position = Vector2(70, -6)
-curve = SubResource("Curve2D_esggd")
+curve = SubResource("Curve2D_fw1x3")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -105,10 +105,10 @@ centered = false
 position = Vector2(4018, 1339)
 
 [node name="Fish" parent="." instance=ExtResource("4_a44lx")]
-position = Vector2(6330, 1033)
+position = Vector2(7894, 1300)
 
 [node name="Fish2" parent="." instance=ExtResource("4_a44lx")]
-position = Vector2(6560, 1041)
+position = Vector2(8132, 1442)
 
 [node name="Fish3" parent="." instance=ExtResource("4_a44lx")]
 position = Vector2(10976, 1376)
