@@ -34,6 +34,8 @@ func _physics_process(delta: float) -> void:
 	var in_water := global_position.y > Game.get_water_y()
 	if in_water:
 		boost_charged = true
+		if linear_velocity.y < 0:
+			linear_velocity.x += 10
 	if boost_charged and !in_water:
 		boost_charged = false
 		linear_velocity *= 2
