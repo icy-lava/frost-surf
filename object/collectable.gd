@@ -7,6 +7,7 @@ class_name Collectable
 enum Kind {
 	None,
 	Fish,
+	BoostFish,
 	Feather
 }
 
