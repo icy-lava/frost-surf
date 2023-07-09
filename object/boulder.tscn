@@ -1,10 +1,25 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfb6u1ahuntar"]
 
 [ext_resource type="Script" path="res://object/boulder.gd" id="1_454ew"]
-[ext_resource type="Texture2D" uid="uid://rkadr7sdqkqv" path="res://asset/image/gmtk_coin.png" id="1_x1b27"]
+[ext_resource type="Texture2D" uid="uid://cb5bosc2rkl1t" path="res://asset/image/boulder.png" id="2_kocpl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4do7s"]
 radius = 90.0
+
+[sub_resource type="Animation" id="Animation_pwqst"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_lhe2w"]
 resource_name = "boulder_off"
@@ -22,21 +37,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_pwqst"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l8qsl"]
 _data = {
 "RESET": SubResource("Animation_pwqst"),
@@ -50,7 +50,7 @@ script = ExtResource("1_454ew")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("1_x1b27")
+texture = ExtResource("2_kocpl")
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4do7s")
