@@ -10,6 +10,8 @@ var previous_window_mode := DisplayServer.window_get_mode()
 
 func _ready() -> void:
 	randomize()
+	var music := preload("res://object/music.tscn").instantiate()
+	self.add_child(music)
 
 func dampf(from: float, to: float, smoothing: float, delta: float) -> float:
 	return lerp(from, to, 1.0 - pow(smoothing, delta))
