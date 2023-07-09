@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bl0ot1c3o7iws"]
+[gd_scene load_steps=17 format=3 uid="uid://bl0ot1c3o7iws"]
 
 [ext_resource type="Texture2D" uid="uid://b48qqyhi3eprh" path="res://asset/image/background.png" id="1_mmlol"]
 [ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="2_4t56j"]
@@ -7,13 +7,52 @@
 [ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="5_i31rq"]
 [ext_resource type="PackedScene" uid="uid://dldawl6et5j6h" path="res://object/finish_line.tscn" id="6_o1yhx"]
 [ext_resource type="PackedScene" uid="uid://oto046y75skc" path="res://object/feather.tscn" id="7_ryole"]
+[ext_resource type="Shader" path="res://water.gdshader" id="8_bji0o"]
+[ext_resource type="Texture2D" uid="uid://dbddk1amiira2" path="res://asset/image/water_uv_offset.png" id="9_bl71l"]
+[ext_resource type="Texture2D" uid="uid://i4705ggex7ct" path="res://asset/image/water_diffuse.png" id="10_egwpx"]
+[ext_resource type="Texture2D" uid="uid://cecs31aylt2hl" path="res://asset/image/water_normal.png" id="11_ugvtw"]
 
-[sub_resource type="Curve2D" id="Curve2D_8sh5k"]
+[sub_resource type="Curve2D" id="Curve2D_v02rc"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -429.103, -110.827, 429.103, 110.827, 1683, 1468, -841.228, 295.306, 841.228, -295.306, 3515, 1447, -923.156, -65.2328, 923.156, 65.2328, 5772, 547, -721.377, -171.561, 721.377, 171.561, 8527, 1473, -453.797, -119.509, 453.797, 119.509, 11438, 1266, -288.174, 36.0217, 288.174, -36.0217, 12512, 1758, -490.109, -192.768, 490.109, 192.768, 14410, 1494, -440.63, 213.588, 440.63, -213.588, 17376, 1554, 0, 0, 0, 0, 29390, 1426, 0, 0, 0, 0, 29513, 2178)
 }
 point_count = 12
+
+[sub_resource type="Gradient" id="Gradient_hbmpp"]
+offsets = PackedFloat32Array(0.37037, 0.548148, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.211765, 0.211765, 0.211765, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_17ty2"]
+gradient = SubResource("Gradient_hbmpp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_itot3"]
+shader = ExtResource("8_bji0o")
+shader_parameter/water_tint = Color(0.22, 0.46, 0.73, 1)
+shader_parameter/shadow_color = Color(0.09, 0.11, 0.46, 1)
+shader_parameter/distortion_scale = Vector2(0.5, 0.5)
+shader_parameter/distortion_time_scale = 0.05
+shader_parameter/distortion_amplitude = 0.1
+shader_parameter/tile_factor = 10.0
+shader_parameter/water_time_scale = 0.1
+shader_parameter/reflection_intensity = 0.5
+shader_parameter/transform = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+shader_parameter/parallax_factor = 0.2
+shader_parameter/shore_color = Color(0.14, 0.41, 0.67, 1)
+shader_parameter/shore_size = 0.045
+shader_parameter/shore_smoothness = 0.008
+shader_parameter/shore_height_factor = 0.049
+shader_parameter/scale = Vector2(1, 1)
+shader_parameter/zoom_y = 1.0
+shader_parameter/aspect_ratio = 0.25
+shader_parameter/transition_gradient = SubResource("GradientTexture2D_17ty2")
+shader_parameter/distortion_map = ExtResource("9_bl71l")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_qj6ic"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("10_egwpx")
+normal_texture = ExtResource("11_ugvtw")
+texture_repeat = 3
 
 [node name="World" type="Node2D"]
 
@@ -38,7 +77,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_6rbk2")]
-curve = SubResource("Curve2D_8sh5k")
+curve = SubResource("Curve2D_v02rc")
 
 [node name="Fish" parent="." instance=ExtResource("4_nm6u3")]
 position = Vector2(5613, 292)
@@ -70,3 +109,16 @@ position = Vector2(19053, 1125)
 
 [node name="Feather" parent="." instance=ExtResource("7_ryole")]
 position = Vector2(3060, 1028)
+
+[node name="WaterForeground" type="ParallaxBackground" parent="."]
+layer = 100
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="WaterForeground"]
+motion_mirroring = Vector2(5120, 0)
+
+[node name="Water" type="Sprite2D" parent="WaterForeground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_itot3")
+position = Vector2(0, 1700)
+scale = Vector2(20, 5)
+texture = SubResource("CanvasTexture_qj6ic")
+centered = false

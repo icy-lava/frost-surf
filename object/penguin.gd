@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	if boost_charged and !in_water:
 		boost_charged = false
 		linear_velocity *= 2
-	modulate = Color.BLUE if in_water else Color.WHITE
+	#modulate = Color.BLUE if in_water else Color.WHITE
 	#boost_level = move_toward(boost_level, 1 if in_water else 0, delta / full_boost_time)
 	#var boost_level_adjusted = boost_curve.sample_baked(boost_level)
 	#modulate = lerp(Color.WHITE, Color.BLUE, boost_level_adjusted)
