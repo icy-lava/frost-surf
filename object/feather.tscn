@@ -23,3 +23,5 @@ rotation = 0.523599
 [node name="Sprite" parent="CollectTransform" index="0"]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_a8wgq")
+
+[connection signal="animation_finished" from="CollectableAnimation" to="." method="_on_collectable_animation_animation_finished"]

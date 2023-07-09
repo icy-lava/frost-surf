@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://yq6kgsakr13t"]
+[gd_scene load_steps=4 format=3 uid="uid://yq6kgsakr13t"]
 
+[ext_resource type="Script" path="res://object/boost_fish.gd" id="1_626pj"]
 [ext_resource type="PackedScene" uid="uid://cjy4jiomrciuy" path="res://object/fish.tscn" id="1_o0r2k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bis12"]
@@ -8,10 +9,13 @@ radius = 96.0
 [node name="BoostFish" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 2
+script = ExtResource("1_626pj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_bis12")
 
 [node name="Fish" parent="." instance=ExtResource("1_o0r2k")]
+
+[connection signal="animation_finished" from="Fish/CollectableAnimation" to="." method="_on_collectable_animation_animation_finished"]
 
 [editable path="Fish"]
