@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://tvryxgw1tiou"]
+
+[ext_resource type="Texture2D" uid="uid://b48qqyhi3eprh" path="res://asset/image/background.png" id="1_an3j7"]
+[ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="2_burck"]
+[ext_resource type="PackedScene" uid="uid://dtmycdb0xitq2" path="res://object/terrain.tscn" id="3_2wyr3"]
+[ext_resource type="PackedScene" uid="uid://cjy4jiomrciuy" path="res://object/fish.tscn" id="4_rkjey"]
+[ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="6_v1le8"]
+
+[sub_resource type="Curve2D" id="Curve2D_x8h85"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 1683, 1468, 0, 0, 0, 0, 19782, 1454, 0, 0, 0, 0, 19777, 2168)
+}
+point_count = 5
+
+[node name="World" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(9960, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(-129, -96)
+texture = ExtResource("1_an3j7")
+centered = false
+region_rect = Rect2(0, 0, 4000, 2160)
+
+[node name="Penguin" parent="." instance=ExtResource("2_burck")]
+position = Vector2(982, 292)
+floor_stop_on_slope = false
+
+[node name="Camera2D" type="Camera2D" parent="Penguin"]
+position = Vector2(1200, 0)
+limit_top = 0
+limit_bottom = 100
+
+[node name="Terrain" parent="." instance=ExtResource("3_2wyr3")]
+curve = SubResource("Curve2D_x8h85")
+
+[node name="Fish" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(4047, 1350)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="CoinCounter" parent="HUD" instance=ExtResource("6_v1le8")]
+
+[node name="Fish2" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(4262, 1350)
+
+[node name="Fish3" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(4490, 1350)
+
+[node name="Fish4" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(7354, 1050)
+
+[node name="Fish5" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(7558, 1050)
+
+[node name="Fish6" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(11979, 1050)
+
+[node name="Fish7" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(12184, 1050)
+
+[node name="Fish8" parent="." instance=ExtResource("4_rkjey")]
+position = Vector2(11239, 1617)
