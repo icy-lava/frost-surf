@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dldawl6et5j6h" path="res://object/finish_line.tscn" id="6_2f04q"]
 [ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="6_v1le8"]
 
-[sub_resource type="Curve2D" id="Curve2D_do2n8"]
+[sub_resource type="Curve2D" id="Curve2D_5ku7m"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 1683, 1468, 0, 0, 0, 0, 19782, 1454, 0, 0, 0, 0, 19777, 2168)
@@ -24,14 +24,12 @@ motion_mirroring = Vector2(9960, 0)
 
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_repeat = 2
-position = Vector2(-129, -96)
 texture = ExtResource("1_an3j7")
 centered = false
 region_rect = Rect2(0, 0, 4000, 2160)
 
 [node name="Penguin" parent="." instance=ExtResource("2_burck")]
 position = Vector2(982, 292)
-floor_stop_on_slope = false
 
 [node name="Camera2D" type="Camera2D" parent="Penguin"]
 position = Vector2(1200, 0)
@@ -39,7 +37,7 @@ limit_top = 0
 limit_bottom = 100
 
 [node name="Terrain" parent="." instance=ExtResource("3_2wyr3")]
-curve = SubResource("Curve2D_do2n8")
+curve = SubResource("Curve2D_5ku7m")
 
 [node name="Fish" parent="." instance=ExtResource("4_rkjey")]
 position = Vector2(4047, 1350)
@@ -70,4 +68,4 @@ position = Vector2(12184, 1050)
 position = Vector2(11239, 1617)
 
 [node name="FinishLine" parent="." instance=ExtResource("6_2f04q")]
-position = Vector2(19053, 1125)
+position = Vector2(18144, 1035)
