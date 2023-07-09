@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c55md7bv37dmb" path="res://object/collectable.tscn" id="1_or5yc"]
 [ext_resource type="Texture2D" uid="uid://vd2s5f8l80ru" path="res://asset/image/feather.png" id="2_x7by2"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ufvxn"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_a8wgq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -17,7 +17,9 @@ animations = [{
 [node name="Feather" instance=ExtResource("1_or5yc")]
 kind = 2
 
-[node name="Sprite" parent="." index="2"]
-rotation = 0.523598
+[node name="CollectTransform" parent="." index="2"]
+rotation = 0.523599
+
+[node name="Sprite" parent="CollectTransform" index="0"]
 scale = Vector2(1.5, 1.5)
-sprite_frames = SubResource("SpriteFrames_ufvxn")
+sprite_frames = SubResource("SpriteFrames_a8wgq")
