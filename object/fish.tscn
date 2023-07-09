@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://culimtyep1nfe" path="res://asset/image/fish/0.png" id="2_4ygsm"]
 [ext_resource type="Texture2D" uid="uid://bh5m3uiqrun0o" path="res://asset/image/fish/1.png" id="3_l5luo"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jqi8m"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_5f68s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -21,7 +21,9 @@ animations = [{
 [node name="Fish" instance=ExtResource("1_opcsj")]
 kind = 1
 
-[node name="Sprite" parent="." index="2"]
-rotation = 0.523598
+[node name="CollectTransform" parent="." index="2"]
+rotation = 0.523599
+
+[node name="Sprite" parent="CollectTransform" index="0"]
 scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_jqi8m")
+sprite_frames = SubResource("SpriteFrames_5f68s")

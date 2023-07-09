@@ -10,10 +10,12 @@ enum Kind {
 	Feather
 }
 
-@export var kind: Kind
+@export var kind: Kind = Kind.None
 
 func _ready() -> void:
+	assert(kind != Kind.None, "Collectable of Kind.None should never be instantiated")
 	set_random_sprite()
+	Anim.seek(randf_range(0, Anim.current_animation_length))
 
 func get_sprite_count() -> int:
 	if Sprite.sprite_frames:

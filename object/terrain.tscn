@@ -14,6 +14,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Terrain" type="Path2D" node_paths=PackedStringArray("Drawable", "Polygon")]
+z_index = -4096
 curve = SubResource("Curve2D_cx5ah")
 script = ExtResource("1_yfpvp")
 Drawable = NodePath("Drawable")
