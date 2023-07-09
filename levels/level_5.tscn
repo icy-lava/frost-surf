@@ -1,0 +1,117 @@
+[gd_scene load_steps=17 format=3 uid="uid://cvq14d5wca2l"]
+
+[ext_resource type="Texture2D" uid="uid://b48qqyhi3eprh" path="res://asset/image/background.png" id="1_bpw83"]
+[ext_resource type="PackedScene" uid="uid://d2ynjwy5srmdg" path="res://object/penguin.tscn" id="2_iv6nr"]
+[ext_resource type="PackedScene" uid="uid://dtmycdb0xitq2" path="res://object/terrain.tscn" id="3_rqufs"]
+[ext_resource type="PackedScene" uid="uid://p8osiwkrbgs5" path="res://object/coin_counter.tscn" id="4_sk2q7"]
+[ext_resource type="PackedScene" uid="uid://dldawl6et5j6h" path="res://object/finish_line.tscn" id="5_irveu"]
+[ext_resource type="Shader" path="res://water.gdshader" id="6_jaks7"]
+[ext_resource type="Texture2D" uid="uid://dbddk1amiira2" path="res://asset/image/water_uv_offset.png" id="7_xmrp4"]
+[ext_resource type="Texture2D" uid="uid://i4705ggex7ct" path="res://asset/image/water_diffuse.png" id="8_cimgi"]
+[ext_resource type="Texture2D" uid="uid://cecs31aylt2hl" path="res://asset/image/water_normal.png" id="9_8vh6u"]
+[ext_resource type="PackedScene" uid="uid://dfb6u1ahuntar" path="res://object/boulder.tscn" id="10_1t63c"]
+[ext_resource type="PackedScene" uid="uid://cjy4jiomrciuy" path="res://object/fish.tscn" id="11_goc04"]
+
+[sub_resource type="Curve2D" id="Curve2D_2l22k"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -138, 403, -301.794, -433.463, 301.794, 433.463, 947, 690, -366.807, 4.3257, 366.807, -4.3257, 2034, 1674, -313.899, 10.0414, 313.899, -10.0414, 3325, 1376, -217.474, -2.3811, 217.474, 2.3811, 3967, 1443, -544.966, -23.4717, 544.966, 23.4717, 4854, 1362, -1165.49, -40.3441, 1165.49, 40.3441, 7552, 1150, -816.009, 33.5573, 816.009, -33.5573, 9409, 1737, -438.499, 287.671, 438.499, -287.671, 10480, 610, -346.605, -28.925, 346.605, 28.925, 11766, 438, -239.744, -132.142, 239.744, 132.142, 12161, 1437, -523.375, -50.8542, 523.375, 50.8542, 13253, 1076, -695.333, -240.781, 695.333, 240.781, 14563, 1468, 0, 0, 0, 0, 27870, 1507, 0, 0, 0, 0, 28085, 2141)
+}
+point_count = 15
+
+[sub_resource type="Gradient" id="Gradient_gpc65"]
+offsets = PackedFloat32Array(0.37037, 0.548148, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.211765, 0.211765, 0.211765, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_umahi"]
+gradient = SubResource("Gradient_gpc65")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqdvh"]
+shader = ExtResource("6_jaks7")
+shader_parameter/water_tint = Color(0.22, 0.46, 0.73, 1)
+shader_parameter/shadow_color = Color(0.09, 0.11, 0.46, 1)
+shader_parameter/distortion_scale = Vector2(0.5, 0.5)
+shader_parameter/distortion_time_scale = 0.05
+shader_parameter/distortion_amplitude = 0.1
+shader_parameter/tile_factor = 10.0
+shader_parameter/water_time_scale = 0.1
+shader_parameter/reflection_intensity = 0.5
+shader_parameter/transform = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+shader_parameter/parallax_factor = 0.2
+shader_parameter/shore_color = Color(0.14, 0.41, 0.67, 1)
+shader_parameter/shore_size = 0.045
+shader_parameter/shore_smoothness = 0.008
+shader_parameter/shore_height_factor = 0.049
+shader_parameter/scale = Vector2(1, 1)
+shader_parameter/zoom_y = 1.0
+shader_parameter/aspect_ratio = 0.25
+shader_parameter/transition_gradient = SubResource("GradientTexture2D_umahi")
+shader_parameter/distortion_map = ExtResource("7_xmrp4")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_dluq3"]
+resource_local_to_scene = true
+diffuse_texture = ExtResource("8_cimgi")
+normal_texture = ExtResource("9_8vh6u")
+texture_repeat = 3
+
+[node name="World" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(9960, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(70, -6)
+texture = ExtResource("1_bpw83")
+centered = false
+region_rect = Rect2(0, 0, 4000, 2160)
+
+[node name="Penguin" parent="." instance=ExtResource("2_iv6nr")]
+position = Vector2(982, 292)
+
+[node name="Camera2D" type="Camera2D" parent="Penguin"]
+position = Vector2(1200, 0)
+limit_top = 0
+limit_bottom = 100
+
+[node name="Terrain" parent="." instance=ExtResource("3_rqufs")]
+position = Vector2(70, -6)
+curve = SubResource("Curve2D_2l22k")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="CoinCounter" parent="HUD" instance=ExtResource("4_sk2q7")]
+
+[node name="FinishLine" parent="." node_paths=PackedStringArray("fish_counter") instance=ExtResource("5_irveu")]
+position = Vector2(18144, 1035)
+current_scene = null
+fishcount = 3
+fish_counter = NodePath("../HUD/CoinCounter")
+
+[node name="WaterForeground" type="ParallaxBackground" parent="."]
+layer = 100
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="WaterForeground"]
+motion_mirroring = Vector2(5120, 0)
+
+[node name="Water" type="Sprite2D" parent="WaterForeground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_hqdvh")
+position = Vector2(0, 1700)
+scale = Vector2(20, 5)
+texture = SubResource("CanvasTexture_dluq3")
+centered = false
+
+[node name="Boulder" parent="." instance=ExtResource("10_1t63c")]
+position = Vector2(4018, 1339)
+
+[node name="Fish" parent="." instance=ExtResource("11_goc04")]
+position = Vector2(8582, 1231)
+
+[node name="Fish2" parent="." instance=ExtResource("11_goc04")]
+position = Vector2(8895, 1416)
+
+[node name="Fish3" parent="." instance=ExtResource("11_goc04")]
+position = Vector2(12277, 1300)
