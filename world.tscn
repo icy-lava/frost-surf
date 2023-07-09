@@ -78,7 +78,7 @@ motion_mirroring = Vector2(5120, 0)
 
 [node name="Water" type="Sprite2D" parent="WaterForeground/ParallaxLayer"]
 material = SubResource("ShaderMaterial_3f015")
-position = Vector2(0, 1800)
+position = Vector2(0, 1700)
 scale = Vector2(20, 5)
 texture = SubResource("CanvasTexture_k611y")
 centered = false
