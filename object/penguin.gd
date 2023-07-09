@@ -13,6 +13,7 @@ const fish_boost: float = 500
 
 const full_boost_time: float = 0.7
 var boost_level: float = 0
+var boost_charged: bool = false
 
 func _physics_process(delta: float) -> void:
 	# Physics
@@ -31,10 +32,16 @@ func _physics_process(delta: float) -> void:
 	
 	# Water boost
 	var in_water := global_position.y > Game.get_water_y()
-	boost_level = move_toward(boost_level, 1 if in_water else 0, delta / full_boost_time)
-	var boost_level_adjusted = boost_curve.sample_baked(boost_level)
-#	modulate = lerp(Color.WHITE, Color.BLUE, boost_level_adjusted)
-	linear_velocity.x += 1000 * delta * boost_level_adjusted
+	if in_water:
+		boost_charged = true
+	if boost_charged and !in_water:
+		boost_charged = false
+		linear_velocity *= 2
+	modulate = Color.BLUE if in_water else Color.WHITE
+	#boost_level = move_toward(boost_level, 1 if in_water else 0, delta / full_boost_time)
+	#var boost_level_adjusted = boost_curve.sample_baked(boost_level)
+	#modulate = lerp(Color.WHITE, Color.BLUE, boost_level_adjusted)
+	#linear_velocity.x += 1000 * delta * boost_level_adjusted
 	
 	# Gradual sprite rotation, based on velocity
 	var current_rotation_vector := Vector2.from_angle(Sprite.rotation)
@@ -49,7 +56,7 @@ func collect_item(item: Collectable) -> void:
 		Collectable.Kind.Fish:
 			collected_fish.emit()
 		Collectable.Kind.BoostFish:
-			velocity += velocity.normalized() * fish_boost
+			linear_velocity += linear_velocity.normalized() * fish_boost
 			collected_fish.emit()
 		Collectable.Kind.Feather:
 			linear_velocity.y = -feather_boost
