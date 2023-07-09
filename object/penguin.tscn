@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2ynjwy5srmdg"]
+[gd_scene load_steps=6 format=3 uid="uid://d2ynjwy5srmdg"]
 
 [ext_resource type="Script" path="res://object/penguin.gd" id="1_v1bn4"]
 [ext_resource type="Texture2D" uid="uid://ba767gnxskwg2" path="res://asset/image/penguin.png" id="2_b6j4g"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a6ys8"]
+friction = 0.0
 
 [sub_resource type="Curve" id="Curve_0o8xp"]
 _data = [Vector2(0, 0), 0.0, 0.136397, 0, 0, Vector2(0.269565, 0.263158), 1.13326, 1.13326, 0, 0, Vector2(0.643478, 0.894737), 0.938775, 0.938775, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -10,8 +13,10 @@ point_count = 4
 [sub_resource type="CircleShape2D" id="CircleShape2D_ypf1c"]
 radius = 53.0094
 
-[node name="Penguin" type="CharacterBody2D" node_paths=PackedStringArray("Sprite") groups=["penguin"]]
-floor_stop_on_slope = false
+[node name="Penguin" type="RigidBody2D" node_paths=PackedStringArray("Sprite") groups=["penguin"]]
+physics_material_override = SubResource("PhysicsMaterial_a6ys8")
+can_sleep = false
+lock_rotation = true
 script = ExtResource("1_v1bn4")
 Sprite = NodePath("Sprite")
 boost_curve = SubResource("Curve_0o8xp")
