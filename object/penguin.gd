@@ -15,6 +15,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	velocity = get_real_velocity()
 	
+	# Bounce player away from left border
+	if global_position.x < 0:
+		velocity.x = abs(velocity.x)
+		global_position.x = 0
+	
 	# Gradual sprite rotation, based on velocity
 	var current_rotation_vector := Vector2.from_angle(Sprite.rotation)
 	var target_rotation_vector := velocity.normalized()
