@@ -13,6 +13,9 @@ const mouse_y_margin := 100
 const min_crack_interval: float = 400
 const max_crack_interval: float = 700
 
+const min_iceberg_interval: float = 800
+const max_iceberg_interval: float = 2000
+
 var all_points: PackedVector2Array
 var start_x: float
 var end_x: float
@@ -52,6 +55,14 @@ func generate_from_curve(curve: Curve2D) -> void:
 		crack.position.x = crack_x
 		Drawable.add_child(crack)
 		crack_x += randf_range(min_crack_interval, max_crack_interval)
+	
+	var iceberg_x: float = randf_range(0, min_iceberg_interval)
+	while iceberg_x < end_x:
+		var iceberg := preload("res://object/iceberg.tscn").instantiate()
+		iceberg.position.x = iceberg_x
+		iceberg.position.y = 2160 - 100
+		add_child(iceberg)
+		iceberg_x += randf_range(min_iceberg_interval, max_iceberg_interval)
 
 func _ready() -> void:
 	generate_from_curve(curve)
