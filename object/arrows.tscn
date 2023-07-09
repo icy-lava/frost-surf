@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://f4uu6q25evnv"]
+
+[ext_resource type="Texture2D" uid="uid://o0bjb42vqe5t" path="res://asset/image/arrow/arraw_red.png" id="1_k8rla"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rcf34"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_x7pqp"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.203209, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.588235, 1, 1, 1, 0)
+
+[node name="Arrows" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_rcf34")
+amount = 10
+lifetime = 0.3
+texture = ExtResource("1_k8rla")
+emission_shape = 3
+emission_rect_extents = Vector2(200, 200)
+direction = Vector2(0, 1)
+spread = 0.0
+gravity = Vector2(0, 2000)
+initial_velocity_min = 1500.0
+initial_velocity_max = 2000.0
+color_ramp = SubResource("Gradient_x7pqp")

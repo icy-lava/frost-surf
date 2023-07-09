@@ -3,6 +3,7 @@ class_name Terrain
 
 @export var Drawable: Polygon2D
 @export var Polygon: CollisionPolygon2D
+@export var Indicator: Node2D
 @export var effect_falloff: Curve
 
 const max_modify_distance: float = 500
@@ -87,12 +88,20 @@ func set_polys_from_range(start: int, end: int) -> void:
 	last_range_start = start
 	last_range_end = end
 
+func set_indicator_opacity(opacity: float) -> void:
+	Indicator.modulate.a = opacity
+
 func _ready() -> void:
+	set_indicator_opacity(0)
 	generate_from_curve(curve)
 
 func _physics_process(delta: float) -> void:
+	var indicator_opacity_target: float = 0
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		indicator_opacity_target = 1
 		apply_gravitation(get_global_mouse_position(), delta)
+	Indicator.global_position = get_global_mouse_position()
+	Indicator.modulate.a = move_toward(Indicator.modulate.a, indicator_opacity_target, delta / 0.2)
 	
 	var penguin_x := Game.get_penguin().position.x
 	var start := x_to_nearest_index(penguin_x - 2000)
@@ -121,7 +130,7 @@ func apply_gravitation(global_position: Vector2, delta: float):
 	var range_i := max_i - min_i + 1
 	min_i -= range_i / 2
 	max_i += range_i / 2
-	for i in range(max(min_i, 0), min(max_i, all_points.size() - 3)):
+	for i in range(max(min_i, 0), min(max_i, all_points.size() - 1)):
 		var a := all_points[i]
 		var b := all_points[i + 1]
 		var common: float = (a.y + b.y) / 2

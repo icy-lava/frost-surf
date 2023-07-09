@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxdaxy212ghqo"]
+
+[ext_resource type="PackedScene" uid="uid://f4uu6q25evnv" path="res://object/arrows.tscn" id="1_6f2kh"]
+[ext_resource type="Texture2D" uid="uid://bxc63t7jt0aip" path="res://asset/image/arrow/arraw_blue.png" id="2_d68sk"]
+
+[node name="Indicator" type="Node2D"]
+
+[node name="ArrowsBlue" parent="." instance=ExtResource("1_6f2kh")]
+position = Vector2(0, -800)
+texture = ExtResource("2_d68sk")
+
+[node name="Transform" type="Node2D" parent="."]
+rotation = 3.14159
+
+[node name="ArrowsRed" parent="Transform" instance=ExtResource("1_6f2kh")]
+position = Vector2(0, -800)
+gravity = Vector2(0, -2000)
+angle_min = 180.0
+angle_max = 180.0
